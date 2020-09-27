@@ -1,0 +1,438 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import NProgress from 'nprogress'
+
+Vue.use(VueRouter)
+
+const routes = [
+	{
+		path: '/',
+		name: 'Home',
+		component: () => import('../views/Home.vue'),
+		meta: {
+			title: 'GMQM',
+		},
+		children: [
+			{
+				path: '/index',
+				name: 'index',
+				component: () => import('../views/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/plan/product',
+				name: 'Product',
+				component: () => import('../views/Plan/Product.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/plan/codepackage',
+				name: 'CodePackage',
+				component: () => import('../views/Plan/CodePackage.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/plan/worksheet',
+				name: 'Worksheet',
+				component: () => import('../views/Plan/Worksheet.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/plan/dispatch',
+				name: 'Dispatch',
+				component: () => import('../views/Plan/Dispatch.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/control/devices',
+				name: 'ControlMonitorDevices',
+				component: () => import('../views/ControlMonitor/DeviceStatus.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/control/stat/defect',
+				name: 'ControlMonitorDefectStatistical',
+				component: () => import('../views/ControlMonitor/DefectStat.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/control/production/defect',
+				name: 'production_defect',
+				component: () => import('../views/ControlMonitor/ProductionInfo.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/control/stat/other',
+				name: 'ControlMonitorOtherStatistical',
+				component: () => import('../views/ControlMonitor/OtherStat.vue'),
+				meta: {
+					title: '其他统计',
+				},
+			},
+			{
+				path: '/control/stat/other/orders',
+				name: 'ControlMonitorOtherOrders',
+				component: () => import('../views/ControlMonitor/OtherStatOrders.vue'),
+				meta: {
+					title: '其他统计',
+				},
+			},
+
+			{
+				path: '/control/production',
+				name: 'ControlMonitorProduction',
+				component: () => import('../views/ControlMonitor/ProductionStatus.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/workshop/board',
+				name: 'WorkshopBoard',
+				component: () => import('../views/WorkshopBoard/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/workshop/view',
+				name: 'WorkshopView',
+				component: () => import('../views/WorkshopBoard/View.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/check/defects',
+				name: 'DefectList',
+				component: () => import('../views/CheckManage/DefectList.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/check/craft',
+				name: 'CraftList',
+				component: () => import('../views/CheckManage/Craft.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/check/craft/view',
+				name: 'CraftView',
+				component: () => import('../views/CheckManage/CraftInfo.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/defect/orders',
+				name: 'DefectOrders',
+				component: () => import('../views/DefectFilter/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/defect/batches',
+				name: 'DefectBatches',
+				component: () => import('../views/DefectFilter/BatchList.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/defect/report',
+				name: 'DefectReport',
+				component: () => import('../views/DefectFilter/DefectReport.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			// {
+			// 	path: '/defect/orders',
+			// 	name: 'DefectOrders',
+			// 	component: () => import('../views/DefectFilter/Orders1.vue'),
+			// 	meta: {
+			// 		title: 'GMQM',
+			// 	},
+			// },
+			{
+				path: '/defect/orders/craftinfo',
+				name: 'DefectOrdersCraftInfo',
+				component: () => import('../views/DefectFilter/CraftInfo.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/defect/orders/colorinfo',
+				name: 'DefectOrdersColorInfo',
+				component: () => import('../views/DefectFilter/ColorInfo.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor',
+				name: 'Monitor',
+				component: () => import('../views/Monitor/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/monitor',
+				name: 'EquipMonitor',
+				component: () => import('../views/Monitor/EquipMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/colormonitor',
+				name: 'ColorMonitor',
+				component: () => import('../views/Monitor/ColorMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/defectmonitor',
+				name: 'DefectMonitor',
+				component: () => import('../views/Monitor/DefectMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/parammonitor',
+				name: 'ParamMonitor',
+				component: () => import('../views/Monitor/ParamMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/videomonitor',
+				name: 'VideoMonitor',
+				component: () => import('../views/Monitor/VideoMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/analysismonitor',
+				name: 'DefAnalysisMonitor',
+				component: () => import('../views/Monitor/DefAnalysisMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/monitor/wasterulemonitor',
+				name: 'WasteRuleMonitor',
+				component: () => import('../views/Monitor/WasteRuleMonitor.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/devices',
+				name: 'SystemDevices',
+				component: () => import('../views/SystemManage/Device/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/tech',
+				name: 'Tech',
+				component: () => import('../views/SystemManage/Tech/Tech.vue'),
+				meta: {
+					title: '工艺参数',
+				},
+			},
+			{
+				path: '/sys/tech_group',
+				name: 'TechGroup',
+				component: () => import('../views/SystemManage/Tech/TechGroup.vue'),
+				meta: {
+					title: '工艺参数组',
+				},
+			},
+			{
+				path: '/sys/logs',
+				name: 'SystemLogs',
+				component: () => import('../views/SystemManage/Log/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/Production',
+				name: 'ProductionLogs',
+				component: () => import('../views/SystemManage/Log/Production.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/System',
+				name: 'SysLogs',
+				component: () => import('../views/SystemManage/Log/System.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/server',
+				name: 'SystemServer',
+				component: () => import('../views/SystemManage/Server/Index.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			// {
+			// 	path: '/sys/users',
+			// 	name: 'SystemUsers',
+			// 	component: () => import('../views/SystemManage/User/List.vue'),
+			// 	meta: {
+			// 		title: 'GMQM',
+			// 	},
+			// },
+			{
+				path: '/sys/user',
+				name: 'SystemUser',
+				component: () => import('../views/SystemManage/User/Info.vue'),
+				meta: {
+					title: 'GMQM',
+				},
+			},
+			{
+				path: '/sys/userpwd',
+				name: 'SystemUserPwd',
+				component: () => import('../views/SystemManage/User/password.vue'),
+				meta: {
+					title: '密码',
+				},
+			},
+			{
+				path: '/sys/users',
+				name: 'SystemUsers',
+				component: () => import('../views/SystemManage/User/UserList.vue'),
+				meta: {
+					title: '用户管理',
+				},
+			},
+			{
+				path: '/sys/rolemanage',
+				name: 'roles',
+				component: () => import('../views/SystemManage/User/roleManage.vue'),
+				meta: {
+					title: '角色管理',
+				},
+			},
+			{
+				path: '/sys/menus',
+				name: 'menus',
+				component: () => import('../views/SystemManage/Menu/Index.vue'),
+				meta: {
+					title: '菜单管理',
+				},
+			},
+			{
+				path: '/sys/workshop',
+				name: 'SysWorkshop',
+				component: () => import('../views/SystemManage/WorkShop/Index.vue'),
+				meta: {
+					title: '车间管理',
+				},
+			},
+			{
+				path: '/sys/process',
+				name: 'ProcessConfig',
+				component: () => import('../views/SystemManage/Process/Group.vue'),
+				meta: {
+					title: '工序组管理',
+				},
+			},
+		],
+	},
+	{
+		path: '/control/stat/defect/view',
+		name: 'ControlMonitorDefectStatisticalView',
+		component: () => import('../views/ControlMonitor/DefectStatView.vue'),
+		meta: {
+			title: '统计报表',
+		},
+	},
+	{
+		path: '/control/stat/other/report',
+		name: 'ControlMonitorOtherReport',
+		component: () => import('../views/ControlMonitor/OtherStatReport.vue'),
+		meta: {
+			title: '其他统计',
+		},
+	},
+	{
+		path: '/defect/browser',
+		name: 'DefectBrowser',
+		component: () => import('../views/DefectFilter/Browser.vue'),
+		meta: {
+			title: '缺陷浏览器',
+		},
+	},
+	{
+		path: '/signIn',
+		name: 'SignIn',
+		component: () => import('../views/SignIn.vue'),
+		meta: {
+			title: 'GMQM-登录',
+		},
+	},
+	{
+		path: '/develop',
+		name: 'DevelopView',
+		component: () => import('../views/develop/DevelopView.vue'),
+		meta: {
+			title: '开发',
+		},
+	},
+]
+
+const router = new VueRouter({
+	routes,
+})
+
+// router.beforeEach((to, from, next) => {
+// 	NProgress.start()
+// 	if (to.meta.title) {
+// 		document.title = to.meta.title
+// 	}
+
+// 	next()
+// })
+
+// router.afterEach(() => {
+// 	NProgress.done()
+// })
+
+export default router
