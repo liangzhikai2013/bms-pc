@@ -56,7 +56,8 @@ export default {
 			userid: {
         type: String,
 				required: true,
-			},
+      },
+      
     },
   data() {
     return {
@@ -76,12 +77,17 @@ export default {
           BICCommun:window.vm.$t('message.unread'),
         },
         labelPosition:'right',
-        lunxun:''
+        lunxun:'',
+        limitparam:''
     };
   },
   created(){
     console.log("created")
-    this.lunxun = setInterval(this.read,2000)
+    this.lunxun = setInterval(this.read,1000)
+    this.$emit('addlunxun',this.lunxun)
+     this.$axios.get('/getbmssetparam?userId='+this.userid) .then(response=>{
+       this.limitparam = response.data.data;
+     })
   },
 
   beforeDestroy(){
@@ -97,12 +103,29 @@ export default {
       .then(response=>{
          console.log(response);
          this.BMSform=response.data.data;
+         console.log(response.data.data)
+        
+         console.log(response.data.data.hVoltage.slice(0,5)*1000)
+         var notice=''
+         this.$emit('getnotice',notice)
+         if(response.data.data.hVoltage.slice(0,5)*1000 > this.limitparam.chargLimV){
+           this.$emit('getnotice',notice+"最高单体电压，超过充电限制电压！The max cell voltage exceeds the max limit voltage <br>")
+         }
+         if(response.data.data.lVoltage.slice(0,5)*1000 < this.limitparam.DchargLimV){
+           this.$emit('getnotice',notice+"最低单体电压，低于放电限制电压！The min cell voltage below the min limit voltage！<br>")
+         }
+        if(response.data.data.hTemper.slice(0,5)*1000 > this.limitparam.hTemper){
+          this.$emit('getnotice',notice+"最高单体温度，超过高温保护值！The max temp exceeds the max temp limit！<br>")
+        }
+        if(response.data.data.lTemper.slice(0,5)*1000 < this.limitparam.lTemper){
+          this.$emit('getnotice',notice+"最低单体温度，低于低温保护值！The min temp  below the min temp limit ！<br>")
+        }
+        if(response.data.data.BICCommun == 'FAIL'){
+          this.$emit('getnotice',notice+"通信质量为故障！（一般和良好不需要提示）Communication failure！")
+        }
+        //  if(response.data.data.hTemper == '未配置传感器'){}
       })
-       //获取失败
-      .catch(error=>{
-        console.log(error);
-        this.$message("设备离线");
-      })
+      
 
     },
     set() {

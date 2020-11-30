@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       rlform: {
-        testinfo: "20",
+        testinfo: "未读取",
         region: "",
       },
     };

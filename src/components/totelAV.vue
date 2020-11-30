@@ -105,7 +105,8 @@ export default {
     clearInterval(this.lunxun)
   },
   created(){
-    this.lunxun = setInterval(this.getav,2000)
+    this.lunxun = setInterval(this.getav,1000)
+    this.$emit('addlunxun',this.lunxun)
   },
   methods: {
    

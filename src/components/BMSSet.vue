@@ -1,6 +1,6 @@
 <template>
 <div>
- <el-form ref="form" :model="BMSform" label-width="100px"  id="BMSSetform" :label-position="labelPosition">
+ <el-form ref="form" :model="BMSform" label-width="130px"  id="BMSSetform" :label-position="labelPosition">
             <el-form-item :label="$t('message.bmsparams')">
                 <span style="display: block;width: 200px;">{{$t('message.setvalue')}}</span>
                 <span>{{$t('message.currentvalue')}}</span>
@@ -36,7 +36,18 @@
               <span v-text="BMSNow.lTemper"></span>
             </el-form-item>
             <el-form-item :label="$t('message.SOC')">
-                <el-input size="small" v-model="BMSform.SOC"></el-input>
+                <!-- <el-input size="small" v-model="BMSform.SOC"></el-input> -->
+                 
+                   <!-- <el-radio-group v-model="BMSform.SOC">
+                      <el-radio  :label="0">否</el-radio>
+                      <el-radio  :label="1">是</el-radio>
+                   </el-radio-group> -->
+                   <el-switch
+                      v-model="BMSform.SOC"
+                      style="width: 200px;
+    height: 40px;"
+                    >
+                    </el-switch>
               <span v-text="BMSNow.SOC"></span>
             </el-form-item>
             <el-form-item :label="$t('message.BICNum')">
@@ -128,11 +139,11 @@ export default {
          this.BMSform.SOC=response.data.data[7].nowNumber;
          if (response.data.data[7].nowNumber == "是"){
            this.BMSNow.SOC = response.data.data[7].nowNumber
-           this.BMSform.SOC = 1
+           this.BMSform.SOC = true
           }
           else{
             this.BMSNow.SOC = response.data.data[7].nowNumber
-            this.BMSform.SOC = 0
+            this.BMSform.SOC = false
           }
          this.BMSNow.BICNum=response.data.data[8].nowNumber;
          this.BMSform.BICNum=response.data.data[8].nowNumber.replace("个", "");
@@ -157,7 +168,7 @@ export default {
         DchargLimV: this.BMSform.DchargLimV,
         hTemper: this.BMSform.hTemper,
         lTemper: this.BMSform.lTemper,
-        SOC: this.BMSform.SOC,
+        SOC: this.BMSform.SOC==true?'1':'0',
         BICNum: this.BMSform.BICNum,
         commun: this.BMSform.commun,
       }
@@ -166,6 +177,7 @@ export default {
        //then获取成功；response成功后的返回值（对象）
       .then(response=>{
         this.$message(response.data.msg);
+        this.read();
       })
        .catch(error=>{
         console.log(error);
@@ -202,4 +214,9 @@ export default {
    overflow-y:auto;
 }
 
+</style>
+<style >
+.el-form-item{
+  margin-bottom: 15px;
+}
 </style>

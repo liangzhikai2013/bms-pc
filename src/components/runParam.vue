@@ -83,7 +83,8 @@ created(){
 },
 methods:{
     init() {
-        this.$axios.get('/getbmsparam?userId='+this.userid)
+        console.log(this.$i18n.locale)
+        this.$axios.get('/getbmsparam?userId='+this.userid+'&language='+this.$i18n.locale)
        //then获取成功；response成功后的返回值（对象）
       .then(response=>{
          console.log(response);

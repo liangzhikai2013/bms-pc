@@ -1,6 +1,6 @@
 <template>
     <div style="margin:0 30px">
-        <el-form ref="form" :model="BICform" :inline="true" label-width="150px">
+        <el-form ref="form" :model="BICform" :inline="true" label-width="135px">
             <el-form-item :label="$t('message.checkBICcontent')">
                 <el-switch v-model="BICform.switch" @change="BICswitch"></el-switch>
             </el-form-item>
@@ -12,6 +12,10 @@
                     <el-option v-for="item in BICList"  :label="item.name" :value="item.val" :key="item.id"> </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item >
+               <div>{{BICtemp}}</div>
+            </el-form-item>
+           
 
         </el-form>
 
@@ -57,6 +61,7 @@ export default {
   name: 'BIC',
   
   created(){
+    console.log("init")
     this.init()
   },
    props: {
@@ -75,6 +80,7 @@ export default {
             switch:false,
             BICNum:''
         },
+        BICtemp:'',
         BICList:[
             {id:1,
             name:'name1',
@@ -110,7 +116,7 @@ export default {
        //获取失败
       .catch(error=>{
         console.log(error);
-        this.$message("设备离线");
+        this.$message("正在获取参数");
       })
 
     },
@@ -122,14 +128,16 @@ export default {
        //then获取成功；response成功后的返回值（对象）
       .then(response=>{
          console.log(response);
-         that.tableData=response.data.data;
+         that.tableData=response.data.data.returnList;
+         that.BICtemp = that.$t('message.nowBICtemp')+response.data.data.BICtemp+'℃';
       })
        //获取失败
       .catch(error=>{
         console.log(error);
-        that.$message("设备离线");
+        that.$message("正在获取参数");
       })
-      },2000)
+      },1000)
+      this.$emit('addlunxun',this.lunxun)
       //获取表格数据
      
 

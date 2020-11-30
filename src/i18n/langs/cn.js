@@ -9,14 +9,15 @@ const cn = {
     bmshost:'BMS主机',
     bmsslave:'BMS从机',
     runparam:'运行参数',
-    capacityset:'容量设定',
+    capacityset:'容量测试',
     parmaset:'参数设定',
     totleVE:'总电压总电流设定',
     networkparam:'网络参数',
     linkdevice:'连接设备',
     debugmode:'调试模式',
     settings:'系统设定',
-    readinstructions:'我已阅读BMS客户端使用协议的各项条款',
+    readinstructions:'关于本软件的使用协议，我已经阅读过、并完全同意协议中的条款。',
+    xieyi:'软件使用协议内容：1、我方发布本软件，是为了与我方的电池管理系统硬件配套调试使用，仅允许购买过我方电池管理系统配件的使用者进行下载存储传播使用本软件；2、实际中，没有100%不出错、无漏洞的软件，我方承诺积极处理本软件出现的问题，但因这些问题产生直接、间接的任何责任和损失，我方均不承担。3、如果希望达成某些其他协议，请联系我方单独谈判并签署合同。',
     messagecenter:'消息中心',
     deviceIP:'设备ID',
     devicePort:'设备端口',
@@ -81,7 +82,9 @@ const cn = {
     commun:'BIC采样检测周期',
     send:'发送',
     usersnotice:'用户须知',
-    clearres:'清空接收区'
+    clearres:'清空接收区',
+    seledevice:'选择设备',
+    nowBICtemp:'当前BIC模块温度为'
   },
   ...zhLocale
 };

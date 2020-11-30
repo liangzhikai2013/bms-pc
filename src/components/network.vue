@@ -14,10 +14,10 @@
            <el-dialog
             title="提示"
             :visible.sync="dialogVisible"
-            width="30%"
+            width="50%"
             >
-            <span>这里用于修改当前BMS发射的SSID(WIFI名称)和连接密码，防止第三方利用默认密码恶意登陆BMS。
-            <br><br> <b>注意:</b>在WIFI直连模式下连接的本软件，允许在这里调整。如果是网络模式下连接的本应用软件，请不要在这里更改设定，必须用专门的方式调整。</span>
+            <span>这里用于修改当前BMS发射的SSID(WIFI名称)和连接密码，防止第三方利用默认密码恶意登陆BMS。<br>This is used to modify the SSID (WiFi name) and connection password of the current BMS, so as to prevent the third party from using the default password to login the BMS maliciously.
+            <br><br> <b>注意:</b>在WIFI直连模式下连接的本软件，允许在这里调整。如果是网络模式下连接的本应用软件，请不要在这里更改设定，必须用专门的方式调整。<br>The software connected in WiFi direct connection mode is allowed to be adjusted here. If the application software is connected in network mode, please do not change the setting here, it must be adjusted in a special way.</span>
             <span slot="footer" class="dialog-footer">
               <el-button @click="dialogVisible = false">取 消</el-button>
               <el-button type="primary" @click="dialogVisible = false">确 定</el-button>

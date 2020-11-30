@@ -65,6 +65,8 @@ export default {
        //then获取成功；response成功后的返回值（对象）
       .then(response=>{
         this.BICSetform = response.data.data
+        this.BICSetform.address = response.data.data.address *1
+        // this.BICSetform.address =  this.BICSetform.address 
         this.BICNow.address = response.data.data.address+"#"
         this.BICNow.xinnum = response.data.data.xinnum+" "
         this.BICNow.tempnum = response.data.data.tempnum+" "
@@ -76,9 +78,12 @@ export default {
       
     },
     set() {
+      var address=''
+      if(this.BICSetform.address<10)  address = '0'+this.BICSetform.address
+      else address = this.BICSetform.address
       var data = {
         userId: this.userid,
-        address:this.BICSetform.address,
+        address:address,
         xinnum: this.BICSetform.xinnum,
         tempnum:this.BICSetform.tempnum,
       }
